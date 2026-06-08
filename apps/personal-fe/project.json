@@ -20,7 +20,18 @@
             "input": "apps/personal-fe/public"
           }
         ],
-        "styles": ["apps/personal-fe/src/styles.scss"]
+        "styles": [
+          "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+          "apps/personal-fe/src/styles.scss",
+          "node_modules/prismjs/themes/prism-okaidia.css",
+          "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css"
+        ],
+        "scripts": [
+          "node_modules/prismjs/prism.js",
+          "node_modules/prismjs/components/prism-csharp.min.js",
+          "node_modules/prismjs/components/prism-css.min.js",
+          "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js"
+        ]
       },
       "configurations": {
         "production": {

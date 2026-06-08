@@ -29,8 +29,8 @@ export class PersonalDocumentsService {
 
   async createAndSaveVector(title: string, content: string, meta: Meta) {
     try {
-      const sectionContext = meta?.section ? `\nSECTION: ${meta.section}` : '';
-      const contents = `TITLE: ${title}${sectionContext}\n---\nCONTEXT: ${content}`;
+      const sectionContext = meta?.section ? `\n\n#SECTION: ${meta.section}` : '';
+      const contents = `#TITLE:${title}${sectionContext}\n\n---\n\n${content}`;
       const embedding = await this.embeddingService.embed(contents);
 
       if (embedding.length !== 3072) {
@@ -77,13 +77,9 @@ export class PersonalDocumentsService {
         },
       ]);
 
-      console.log('--- ОТЛАДКА РЕЗУЛЬТАТОВ ---');
-      console.log('Вектор запроса (первые 3 числа):', queryEmbedding.slice(0, 3));
-      console.log('Найдено документов:', data.length);
-      console.log('Сами документы:', JSON.stringify(data, null, 2));
       return data.map((d) => {
-        const sectionContext = d?.metadata.section ? `\nSECTION: ${d.metadata.section}` : '';
-        return `TITLE: ${d.title}${sectionContext}\n---\nCONTEXT: ${d.content}`;
+        const sectionContext = d.meta?.section ? `\n\n#SECTION: ${d.meta.section}` : '';
+        return `#TITLE:${d.title}${sectionContext}\n\n---\n\n${d.content}`;
       })
     } catch (error: any) {
       throw new InternalServerErrorException(

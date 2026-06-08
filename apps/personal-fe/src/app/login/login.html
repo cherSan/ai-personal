@@ -1,0 +1,36 @@
+@if(isAuth()) {
+  <button nz-button (click)="loginService.logout()">LOGOUT</button>
+  <form nz-form [formRoot]="form" novalidate>
+    <div>title: {{JSON.stringify(form.title().errors())}}</div>
+    <div>text: {{JSON.stringify(form.text().errors())}}</div>
+    <div>section: {{JSON.stringify(form.meta.section().errors())}}</div>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="title">Title</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input type="text" id="title" [formField]="form.title" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="сcontent">Content</nz-form-label>
+      <div>
+        <nz-textarea-count [nzMaxCharacterCount]="2000">
+          <textarea [formField]="form.text" nz-input rows="2" placeholder="write content"></textarea>
+        </nz-textarea-count>
+        <markdown class="variable-binding" [data]="form.text().value()"></markdown>
+      </div>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="sect">Section</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input type="text" id="sect" [formField]="form.meta.section" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzSpan]="12" [nzOffset]="5">
+        <button nz-button nzType="primary">Submit</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+} @else {
+  <div #login></div>
+}

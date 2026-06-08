@@ -2,7 +2,7 @@ import {Controller, Post, Body, BadRequestException, UseGuards} from '@nestjs/co
 import { PersonalDocumentsService } from './personal-documents.service';
 import { Meta } from '../embedding/embedding.service';
 import {LLMService} from "../llm/llm.service";
-import {GoogleAdminGuard} from "../common/guards/google-auth.guard";
+import {JwtAuthGuard} from "../common/guards/jwt-auth-guard";
 
 interface CreateDocumentDto {
   title: string;
@@ -23,7 +23,7 @@ export class PersonalDocumentsController {
   ) {}
 
   @Post()
-  @UseGuards(GoogleAdminGuard)
+  @UseGuards(JwtAuthGuard)
   async createDocument(@Body() body: CreateDocumentDto) {
     if (!body.title || !body.text || !body.meta?.section) {
       throw new BadRequestException('Fields "title", "text" and "meta.section" are required');
@@ -54,9 +54,11 @@ export class PersonalDocumentsController {
       body.limit || 5,
     );
 
-    return this.llmSerive.llm(
+    const a = await this.llmSerive.llm(
       results,
       body.q,
     );
+
+    return { a };
   }
 }
