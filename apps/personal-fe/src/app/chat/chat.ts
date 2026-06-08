@@ -22,7 +22,7 @@ export class Chat {
     if (!text) return undefined;
     return {
       method: 'POST',
-      url: 'http://project-15rpb.vercel.app/api/personal-documents/search',
+      url: 'https://project-15rpb-git-master-chersans-projects.vercel.app/api/personal-documents/search',
       body: {
         q: text,
       },
