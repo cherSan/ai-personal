@@ -18,11 +18,10 @@ export class Chat {
 
   public data = httpResource(() => {
     const text = this.text();
-    console.log(123, text)
     if (!text) return undefined;
     return {
       method: 'POST',
-      url: 'https://project-15rpb-git-master-chersans-projects.vercel.app/api/personal-documents/search',
+      url: 'https://project-15rpb.vercel.app/api/personal-documents/search',
       body: {
         q: text,
       },
