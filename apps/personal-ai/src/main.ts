@@ -13,7 +13,7 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
   app.enableCors({
     credentials: true,
-    allowedOrigins: ['*'],
+    origin: 'https://chersan.github.io',
   })
   const port = process.env.PORT || 3000;
   await app.listen(port);
