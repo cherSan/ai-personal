@@ -1,0 +1,26 @@
+{
+  "name": "@ai-personal-ws/personal-ai-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@ai-personal-ws/personal-ai"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "apps/personal-ai-e2e/jest.config.cts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@ai-personal-ws/personal-ai:build",
+          "@ai-personal-ws/personal-ai:serve"
+        ]
+      }
+    }
+  }
+}
