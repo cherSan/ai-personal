@@ -10,7 +10,7 @@ const swcJestConfig = JSON.parse(
 swcJestConfig.swcrc = false;
 
 module.exports = {
-  displayName: '@ai-personal-ws/personal-ai',
+  displayName: 'personal-ai',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {

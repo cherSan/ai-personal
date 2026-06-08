@@ -1,5 +1,5 @@
 {
-  "name": "@ai-personal-ws/personal-ai",
+  "name": "personal-ai",
   "version": "0.0.1",
   "private": true,
   "nx": {
@@ -63,15 +63,15 @@
           "build"
         ],
         "options": {
-          "buildTarget": "@ai-personal-ws/personal-ai:build",
+          "buildTarget": "personal-ai:build",
           "runBuildTargetDependencies": false
         },
         "configurations": {
           "development": {
-            "buildTarget": "@ai-personal-ws/personal-ai:build:development"
+            "buildTarget": "personal-ai:build:development"
           },
           "production": {
-            "buildTarget": "@ai-personal-ws/personal-ai:build:production"
+            "buildTarget": "personal-ai:build:production"
           }
         }
       },
