@@ -47,7 +47,8 @@
               "maximumError": "8kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "baseHref": "/ai-personal/"
         },
         "development": {
           "optimization": false,
