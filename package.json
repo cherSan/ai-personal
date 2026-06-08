@@ -2,7 +2,9 @@
   "name": "@ai-personal-ws/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "personal-ai:build": "nx run personal-ai:build"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "~21.2.0",
