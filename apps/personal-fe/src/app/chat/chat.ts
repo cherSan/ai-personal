@@ -3,7 +3,6 @@ import {HttpHeaders, httpResource} from "@angular/common/http";
 
 @Component({
   selector: 'app-chat',
-  imports: [],
   templateUrl: './chat.html',
   styleUrl: './chat.scss',
 })
@@ -12,7 +11,6 @@ export class Chat {
   text = signal<string | undefined>(undefined)
 
   onSubmit() {
-    console.log(this.value());
     this.text.set(this.value());
   }
 
