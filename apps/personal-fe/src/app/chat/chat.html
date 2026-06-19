@@ -1,2 +1,55 @@
-<input #input [value]="value()" (input)="value.set(input.value)">
-<button (click)="onSubmit()">ChAT</button>
+<div class="chat">
+
+  <div class="header">
+    <h1>Aleksandr Chernushevich AI Assistant</h1>
+
+    <p>
+      This AI assistant is designed to retrieve information from
+      Aleksandr Chernushevich's personal knowledge base and documents.
+    </p>
+  </div>
+
+  <div class="messages">
+
+    @for (message of messages(); track $index) {
+      <div
+        class="message"
+        [class.user]="message.role === 'user'"
+        [class.assistant]="message.role === 'assistant'">
+
+        {{ message.text }}
+      </div>
+    }
+
+    @if (loading()) {
+      <div class="thinking">
+        AI is thinking...
+      </div>
+    }
+
+  </div>
+
+  <div class="input-panel">
+
+    <input
+      #input
+      type="text"
+      class="input"
+      placeholder="Ask a question..."
+      [value]="value()"
+      [disabled]="loading()"
+      (input)="value.set(input.value)"
+      (keydown.enter)="onSubmit()"
+    />
+
+    <button
+      [disabled]="loading() || !value().trim()"
+      (click)="onSubmit()">
+
+      {{ loading() ? 'Loading...' : 'Send' }}
+
+    </button>
+
+  </div>
+
+</div>

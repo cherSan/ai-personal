@@ -18,6 +18,9 @@ export class AgentController {
       throw new BadRequestException('Fields "q" (query) and "meta.section" are required');
     }
 
-    return this.agent.invoke(body.q);
+    const data = await this.agent.invoke(body.q);
+    return {
+      m: data?.message[data.message.length - 1]?.kwargs.content || 'No response from agent'
+    };
   }
 }

@@ -53,7 +53,13 @@
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/personal-fe/src/environments/environment.ts",
+              "with": "apps/personal-fe/src/environments/environment.development.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -71,7 +77,6 @@
       },
       "defaultConfiguration": "development",
       "options": {
-        "proxyConfig": "apps/personal-fe/proxy.conf.json"
       }
     },
     "lint": {
