@@ -82,7 +82,7 @@ export class Chat {
         next: response => {
 
           const answer =
-            response?.answer ??
+            response?.a ??
             response?.text ??
             response?.message ??
             JSON.stringify(response, null, 2);
