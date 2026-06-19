@@ -1,6 +1,6 @@
 const { NxAppWebpackPlugin } = require('@nx/webpack/app-plugin');
 const { join } = require('path');
-const webpack = require('webpack'); // <-- Импортируем сам webpack для IgnorePlugin
+const webpack = require('webpack');
 
 module.exports = {
   output: {
@@ -10,6 +10,12 @@ module.exports = {
       devtoolModuleFilenameTemplate: '[absolute-resource-path]',
     }),
   },
+  resolve: {
+    alias: {
+      'uuid': require.resolve('uuid')
+    }
+  },
+
   plugins: [
     new NxAppWebpackPlugin({
       target: 'node',
@@ -21,24 +27,9 @@ module.exports = {
       outputHashing: 'none',
       generatePackageJson: false,
       sourceMap: true,
-
-      // ИСПРАВЛЕНИЕ 1: Оставляем бэкенд-зависимости внешними для стабильности
-      externalDependencies: 'all',
-
-      // ИСПРАВЛЕНИЕ 2: Принудительно за бандлим только те ESM-модули, которые падали на Vercel
-      bundlePackages: [
-        'uuid',
-        '@octokit/rest',
-        '@octokit/core',
-        '@octokit/request',
-        '@octokit/endpoint',
-        '@langchain/langgraph-checkpoint',
-        '@langchain/textsplitters',
-        '@langchain/core'
-      ]
+      externalDependencies: 'none'
     }),
 
-    // ИСПРАВЛЕНИЕ 3: Игнорируем опциональные микросервисы NestJS, чтобы сборка не падала
     new webpack.IgnorePlugin({
       checkResource(resource) {
         const lazyImports = [
@@ -49,16 +40,17 @@ module.exports = {
           'class-validator',
           'class-transformer'
         ];
-        if (!lazyImports.includes(resource)) {
-          return false;
-        }
-        try {
-          require.resolve(resource);
-          return false;
-        } catch (err) {
-          return true;
-        }
+        return lazyImports.includes(resource);
       },
     }),
+  ],
+
+  externals: [
+    function ({ context, request }, callback) {
+      if (/^@nestjs\//.test(request) || /^mongoose/.test(request) || /^mongodb/.test(request)) {
+        return callback(null, 'commonjs ' + request);
+      }
+      callback();
+    },
   ],
 };
