@@ -20,6 +20,14 @@ module.exports = {
       outputHashing: 'none',
       generatePackageJson: false,
       sourceMap: true,
+
+      bundlePackages: [
+        'uuid',
+        '@octokit/rest',
+        '@octokit/core',
+        '@octokit/request',
+        '@octokit/endpoint'
+      ]
     })
   ],
 };
