@@ -10,6 +10,7 @@ module.exports = {
       devtoolModuleFilenameTemplate: '[absolute-resource-path]',
     }),
   },
+
   resolve: {
     alias: {
       'uuid': require.resolve('uuid')
@@ -27,7 +28,15 @@ module.exports = {
       outputHashing: 'none',
       generatePackageJson: false,
       sourceMap: true,
-      externalDependencies: 'none'
+
+      externalDependencies: 'all',
+
+      bundlePackages: [
+        '@octokit/rest',
+        '@octokit/core',
+        '@octokit/request',
+        '@octokit/endpoint'
+      ]
     }),
 
     new webpack.IgnorePlugin({
@@ -43,14 +52,5 @@ module.exports = {
         return lazyImports.includes(resource);
       },
     }),
-  ],
-
-  externals: [
-    function ({ context, request }, callback) {
-      if (/^@nestjs\//.test(request) || /^mongoose/.test(request) || /^mongodb/.test(request)) {
-        return callback(null, 'commonjs ' + request);
-      }
-      callback();
-    },
   ],
 };
