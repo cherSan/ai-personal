@@ -21,7 +21,6 @@
           }
         ],
         "styles": [
-          "node_modules/ng-zorro-antd/ng-zorro-antd.compact.css",
           "node_modules/ng-zorro-antd/ng-zorro-antd.dark.css",
           "apps/personal-fe/src/styles.scss",
           "node_modules/prismjs/themes/prism-okaidia.css",
