@@ -1,19 +1,3 @@
-import { createRequire } from 'module';
-const requireFallback = createRequire(__filename);
-const Module = require('module');
-const originalLoad = Module._load;
-
-Module._load = function (request: string, parent: any, isMain: boolean) {
-  if (request === 'uuid' || request.endsWith('/uuid/dist-node/index.js')) {
-    try {
-      return requireFallback('uuid');
-    } catch (e) {
-    }
-  }
-  return originalLoad.apply(this, arguments);
-};
-
-
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
