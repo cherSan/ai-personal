@@ -3,9 +3,9 @@
     <div class="badge">
       PERSONAL KNOWLEDGE AI
     </div>
-    <h1>
+    <h2>
       Aleksandr Chernushevich
-    </h1>
+    </h2>
     <p>
       Search documents, projects, experience and personal knowledge through AI.
     </p>
@@ -26,8 +26,11 @@
           [data]="message.text"
         />
         <div class="extra">
-          <span class="timestamp">{{ message.timestamp }}</span>
+          <span class="timestamp">{{ message.timestamp?.toLocaleString() }}</span>
           <span class="role">{{ message.role }}</span>
+          @if (message.tokens) {
+            <span class="tokens">tokens: (input={{ message.tokens?.input_tokens }} + output={{ message.tokens?.output_tokens }} = total={{ message.tokens?.total_tokens }})</span>
+          }
         </div>
       </div>
 

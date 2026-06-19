@@ -7,6 +7,11 @@ interface Message {
   text: string;
   timestamp?: Date;
   error?: boolean;
+  tokens?: {
+    "input_tokens"?: number,
+    "output_tokens"?: number,
+    "total_tokens"?: number
+  }
 }
 
 @Component({
@@ -73,7 +78,7 @@ I can help you find information in Aleksandr Chernushevich\'s personal knowledge
     this.loading.set(true);
 
     this.http.post<any>(
-      '/api/personal-documents/search',
+      '/api/agent',
       {
         q: question,
       }
@@ -82,17 +87,15 @@ I can help you find information in Aleksandr Chernushevich\'s personal knowledge
         next: response => {
 
           const answer =
-            response?.a ??
-            response?.text ??
-            response?.message ??
+            response?.m ??
             JSON.stringify(response, null, 2);
 
-          this.addAnimatedAssistantMessage(answer);
+          const tokens = response.usage_metadata
+
+          this.addAnimatedAssistantMessage(answer, tokens);
         },
 
         error: error => {
-
-          console.error(error);
 
           this.messages.update(messages => [
             ...messages,
@@ -111,7 +114,7 @@ I can help you find information in Aleksandr Chernushevich\'s personal knowledge
       });
   }
 
-  private addAnimatedAssistantMessage(text: string): void {
+  private addAnimatedAssistantMessage(text: string, tokens?: any): void {
 
     this.messages.update(messages => [
       ...messages,
@@ -119,6 +122,7 @@ I can help you find information in Aleksandr Chernushevich\'s personal knowledge
         role: 'assistant',
         text: '',
         timestamp: new Date(),
+        tokens,
       },
     ]);
     let currentIndex = 0;
@@ -132,6 +136,8 @@ I can help you find information in Aleksandr Chernushevich\'s personal knowledge
         updated[updated.length - 1] = {
           role: 'assistant',
           text: text.slice(0, currentIndex + 1),
+          timestamp: new Date(),
+          tokens,
         };
 
         this.scrollToBottom();

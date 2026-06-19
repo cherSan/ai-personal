@@ -42,10 +42,9 @@ export class PersonalDocumentService {
           },
         ]);
         const out = data.map((d) => {
-          const sectionContext = d.meta?.section ? `\n\n#SECTION: ${d.meta.section}` : '';
+          const sectionContext = d.metadata?.section ? `\n\n#SECTION: ${d.metadata.section}` : '';
           return `<personal_document_collection_record>#TITLE:${d.title}${sectionContext}\n\n---\n\n${d.content}</personal_document_collection_record>`;
         });
-
         return `<personal_document_collection>${out.join("\n")}</personal_document_collection>`;
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);

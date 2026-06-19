@@ -37,12 +37,12 @@ header {
   display: flex;
   justify-content: center;
   box-sizing: border-box;
-  padding-top: 16px;
+  padding-top: 24px;
 
   .panel {
-    padding: 24px 28px;
+    padding: 16px;
     box-sizing: border-box;
-    border-radius: 28px;
+    border-radius: 16px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     background:
@@ -55,15 +55,15 @@ header {
 
   .badge {
     display: inline-flex;
-    padding: 7px 14px;
+    padding: 5px;
     border-radius: 999px;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: .14em;
     font-weight: 600;
     color: rgba(255,255,255,.65);
     background:
       rgba(255,255,255,.06);
-    margin-bottom: 14px;
+    margin-bottom: 4px;
   }
 
   h1 {
@@ -94,9 +94,9 @@ header {
     }
   }
   p {
-    margin-top: 10px;
+    margin: 0;
     color: rgba(255,255,255,.55);
-    font-size: 15px;
+    font-size: 12px;
     max-width: 700px;
   }
 }
@@ -116,8 +116,8 @@ main {
 
     .message {
       max-width: 75%;
-      padding: 18px 22px;
-      border-radius: 24px;
+      padding: 12px;
+      border-radius: 12px;
       color: #eee;
 
       backdrop-filter: blur(10px);

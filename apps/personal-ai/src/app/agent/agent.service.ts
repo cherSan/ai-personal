@@ -96,7 +96,6 @@ DATA BLOCK:
 `);
 
     const formattedPrompt = await template.format({ userInput: content });
-
     return myAgent.invoke(
       { messages: [{ role: "user", content: formattedPrompt }] },
       { configurable: { thread_id: "great-gatsby-da" } },

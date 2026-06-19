@@ -20,7 +20,8 @@ export class AgentController {
 
     const data = await this.agent.invoke(body.q);
     return {
-      m: data?.message[data.message.length - 1]?.kwargs.content || 'No response from agent'
+      m: data?.messages?.[data.messages.length - 1]?.content || data?.messages?.[data.messages.length - 1]?.kwargs.content || 'No response from agent',
+      usage_metadata: data?.messages?.[data.messages.length - 1]?.usage_metadata,
     };
   }
 }
