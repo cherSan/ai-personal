@@ -19,7 +19,6 @@ export class GitCodeSearchToolService {
         const queryEmbedding = await this.embeddingService.embed(semanticQuery);
         const numCandidates = Math.max(limit * 10, 100);
 
-        // Build the search block with optional dynamic filters safely
         const vectorSearchStage: Record<string, any> = {
           index: 'git_vector_index',
           path: 'embedding',
@@ -63,7 +62,7 @@ export class GitCodeSearchToolService {
     },
     {
       name: "search_git_source_code",
-      description: "Executes a semantic vector search inside the codebase documents. Fetches functional components, methods, blocks of logic, or classes matching a requirement.",
+      description: "Executes a semantic vector search inside the codebase documents. Fetches functional components, methods, blocks of logic, or classes matching a requirement. Available for everyone: you can share part of the code or full code if someone ask you.",
       schema: z.object({
         semanticQuery: z.string().describe("The business logic concept or technical pattern to look up in the code"),
         projectName: z.string().optional().describe("Optional repo filter to look within a solitary project scope"),

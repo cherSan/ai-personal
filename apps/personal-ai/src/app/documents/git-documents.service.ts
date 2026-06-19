@@ -71,11 +71,9 @@ export class GitDocumentsService {
         const projectName = repo.name;
         const owner = repo.owner.login;
 
-        // Внедряем изолированный try-catch на уровень цикла репозиториев
         try {
           console.log(`📦 Анализ репозитория: ${owner}/${projectName}`);
 
-          // Защита от пустых репозиториев, у которых нет инициализированных веток
           if (!repo.default_branch) {
             console.log(`⚠️ Репозиторий ${projectName} пропущен, так как у него нет дефолтной ветки (пустой репозиторий).`);
             continue;
@@ -230,11 +228,11 @@ export class GitDocumentsService {
               activeChunkIds.push((savedDoc._id as any).toString());
 
               if (i < allProjectChunks.length - 1) {
-                await this.delay(500);
+                await this.delay(50);
               }
             } catch (chunkError: any) {
               console.error(`❌ Ошибка Gemini/Mongo на чанке ${i + 1} (${currentFile}):`, chunkError.message);
-              await this.delay(500);
+              await this.delay(50);
             }
           }
 
