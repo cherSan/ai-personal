@@ -1,9 +1,11 @@
-import { Component, inject, signal } from '@angular/core';
+import {Component, ElementRef, inject, signal, ViewChild} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 interface Message {
   role: 'user' | 'assistant';
   text: string;
+  timestamp?: Date;
+  error?: boolean;
 }
 
 @Component({
@@ -12,6 +14,8 @@ interface Message {
   styleUrl: './chat.scss',
 })
 export class Chat {
+  @ViewChild('messagesContainer')
+  private messagesContainer?: ElementRef<HTMLElement>;
 
   private readonly http = inject(HttpClient);
 
@@ -21,9 +25,30 @@ export class Chat {
   readonly messages = signal<Message[]>([
     {
       role: 'assistant',
-      text: 'Hello! I can help you find information in Aleksandr Chernushevich\'s personal knowledge base.'
+      text: 'Hello! I can help you find information in Aleksandr Chernushevich\'s personal knowledge base.',
+      timestamp: new Date(),
     }
   ]);
+
+  private scrollToBottom(
+    behavior: ScrollBehavior = 'smooth'
+  ): void {
+
+    requestAnimationFrame(() => {
+
+      const container = this.messagesContainer?.nativeElement;
+
+      if (!container) {
+        return;
+      }
+
+      container.scrollTo({
+        top: container.scrollHeight,
+        behavior,
+      });
+
+    });
+  }
 
   onSubmit(): void {
 
@@ -38,8 +63,11 @@ export class Chat {
       {
         role: 'user',
         text: question,
+        timestamp: new Date(),
       },
     ]);
+
+    this.scrollToBottom();
 
     this.value.set('');
     this.loading.set(true);
@@ -71,8 +99,12 @@ export class Chat {
             {
               role: 'assistant',
               text: 'Sorry, an error occurred while processing your request.',
+              timestamp: new Date(),
+              error: true,
             },
           ]);
+
+          this.scrollToBottom();
 
           this.loading.set(false);
         },
@@ -86,9 +118,9 @@ export class Chat {
       {
         role: 'assistant',
         text: '',
+        timestamp: new Date(),
       },
     ]);
-
     let currentIndex = 0;
 
     const timer = setInterval(() => {
@@ -101,6 +133,8 @@ export class Chat {
           role: 'assistant',
           text: text.slice(0, currentIndex + 1),
         };
+
+        this.scrollToBottom();
 
         return updated;
       });

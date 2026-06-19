@@ -1,55 +1,68 @@
-<div class="chat">
-
-  <div class="header">
-    <h1>Aleksandr Chernushevich AI Assistant</h1>
-
+<header>
+  <div class="panel">
+    <div class="badge">
+      PERSONAL KNOWLEDGE AI
+    </div>
+    <h1>
+      Aleksandr Chernushevich
+    </h1>
     <p>
-      This AI assistant is designed to retrieve information from
-      Aleksandr Chernushevich's personal knowledge base and documents.
+      Search documents, projects, experience and personal knowledge through AI.
     </p>
   </div>
+</header>
 
-  <div class="messages">
-
+<main #messagesContainer>
+  <div class="chat">
     @for (message of messages(); track $index) {
+
       <div
         class="message"
         [class.user]="message.role === 'user'"
-        [class.assistant]="message.role === 'assistant'">
-
-        {{ message.text }}
+        [class.assistant]="message.role === 'assistant'"
+        [class.error]="message.error"
+      >
+        <span>{{ message.text }}</span>
+        <div class="extra">
+          <span class="timestamp">{{ message.timestamp }}</span>
+          <span class="role">{{ message.role }}</span>
+        </div>
       </div>
+
     }
 
     @if (loading()) {
+
       <div class="thinking">
-        AI is thinking...
+
+        <span></span>
+        <span></span>
+        <span></span>
+
       </div>
+
     }
-
   </div>
+</main>
 
-  <div class="input-panel">
-
+<footer>
+  <div class="composer">
     <input
       #input
+      class="composer-input"
       type="text"
-      class="input"
-      placeholder="Ask a question..."
+      placeholder="Ask anything..."
       [value]="value()"
       [disabled]="loading()"
       (input)="value.set(input.value)"
       (keydown.enter)="onSubmit()"
     />
-
     <button
+      class="send-button"
       [disabled]="loading() || !value().trim()"
       (click)="onSubmit()">
 
-      {{ loading() ? 'Loading...' : 'Send' }}
-
+      →
     </button>
-
   </div>
-
-</div>
+</footer>
