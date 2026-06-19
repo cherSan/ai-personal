@@ -1,5 +1,6 @@
-import {Component, ElementRef, inject, signal, ViewChild} from '@angular/core';
+import {Component, ElementRef, inject, signal} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {MarkdownComponent} from "ngx-markdown";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -12,10 +13,12 @@ interface Message {
   selector: 'app-chat',
   templateUrl: './chat.html',
   styleUrl: './chat.scss',
+  imports: [
+    MarkdownComponent
+  ]
 })
 export class Chat {
-  @ViewChild('messagesContainer')
-  private messagesContainer?: ElementRef<HTMLElement>;
+  private readonly hostElementRef = inject(ElementRef<HTMLElement>);
 
   private readonly http = inject(HttpClient);
 
@@ -25,18 +28,16 @@ export class Chat {
   readonly messages = signal<Message[]>([
     {
       role: 'assistant',
-      text: 'Hello! I can help you find information in Aleksandr Chernushevich\'s personal knowledge base.',
+      text: `### Hello!
+I can help you find information in Aleksandr Chernushevich\'s personal knowledge base.
+`,
       timestamp: new Date(),
     }
   ]);
 
-  private scrollToBottom(
-    behavior: ScrollBehavior = 'smooth'
-  ): void {
-
+  private scrollToBottom(behavior: ScrollBehavior = 'smooth'): void {
     requestAnimationFrame(() => {
-
-      const container = this.messagesContainer?.nativeElement;
+      const container = this.hostElementRef.nativeElement;
 
       if (!container) {
         return;
@@ -46,7 +47,6 @@ export class Chat {
         top: container.scrollHeight,
         behavior,
       });
-
     });
   }
 

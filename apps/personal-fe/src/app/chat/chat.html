@@ -12,7 +12,7 @@
   </div>
 </header>
 
-<main #messagesContainer>
+<main>
   <div class="chat">
     @for (message of messages(); track $index) {
 
@@ -22,7 +22,9 @@
         [class.assistant]="message.role === 'assistant'"
         [class.error]="message.error"
       >
-        <span>{{ message.text }}</span>
+        <markdown
+          [data]="message.text"
+        />
         <div class="extra">
           <span class="timestamp">{{ message.timestamp }}</span>
           <span class="role">{{ message.role }}</span>
