@@ -97,5 +97,10 @@
   },
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "overrides": {
+    "@langchain/langgraph-checkpoint": {
+      "uuid": "^9.0.1"
+    }
+  }
 }
