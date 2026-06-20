@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://project-15rpb.vercel.app'
+  apiUrl: 'https://ai-personal-94my.onrender.com'
 };
