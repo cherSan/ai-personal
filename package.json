@@ -100,17 +100,31 @@
   ],
   "overrides": {
     "uuid": "^11.0.0",
+    "p-retry": "4.6.2",
     "@langchain/langgraph-checkpoint": {
-      "uuid": "^11.0.0"
+      "uuid": "^11.0.0",
+      "p-retry": "4.6.2"
     },
     "@langchain/community": {
-      "uuid": "^11.0.0"
+      "uuid": "^11.0.0",
+      "p-retry": "4.6.2"
     },
     "@langchain/langgraph-node": {
-      "uuid": "^11.0.0"
+      "uuid": "^11.0.0",
+      "p-retry": "4.6.2"
     },
     "@langchain/core": {
-      "uuid": "^11.0.0"
+      "uuid": "^11.0.0",
+      "p-retry": "4.6.2"
+    },
+    "@langchain/langgraph-react": {
+      "uuid": "^11.0.0",
+      "p-retry": "4.6.2"
+    },
+    "@langchain/langgraph-sdk": {
+      "uuid": "^11.0.0",
+      "p-retry": "4.6.2"
     }
-  }
+  },
+  "packageManager": "pnpm@11.8.0"
 }
