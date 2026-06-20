@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  height: 100vh;
-  width: 100vw;
+  height: 100dvh;
+  width: 100dvw;
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -203,7 +203,7 @@ footer {
   display: flex;
   justify-content: center;
   box-sizing: border-box;
-  padding-bottom: 16px;
+  padding-bottom: 24px;
 
   .composer {
     display: flex;
