@@ -41,7 +41,7 @@
     "prismjs": "^1.30.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
-    "uuid": "^9.0.1"
+    "uuid": "^11.0.0"
   },
   "devDependencies": {
     "@angular-devkit/core": "~21.2.0",
@@ -99,6 +99,18 @@
     "apps/*"
   ],
   "overrides": {
-    "uuid": "^9.0.1"
+    "uuid": "^11.0.0",
+    "@langchain/langgraph-checkpoint": {
+      "uuid": "^11.0.0"
+    },
+    "@langchain/community": {
+      "uuid": "^11.0.0"
+    },
+    "@langchain/langgraph-node": {
+      "uuid": "^11.0.0"
+    },
+    "@langchain/core": {
+      "uuid": "^11.0.0"
+    }
   }
 }
