@@ -115,15 +115,18 @@ main {
     gap: 8px;
 
     .message {
-      max-width: 75%;
-      padding: 12px;
+      max-width: 90%;
+      padding: 8px;
       border-radius: 12px;
       color: #eee;
+      overflow: hidden;
+      text-wrap: auto;
+      word-break: break-word;
 
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      line-height: 1.7;
-      font-size: 15px;
+      line-height: 16px;
+      font-size: 14px;
       box-shadow:
         0 10px 30px rgba(0,0,0,.12);
 
@@ -183,12 +186,12 @@ main {
     }
 
     .extra {
-      padding-top: 12px;
+      padding-top: 8px;
       display: flex;
       align-items: flex-end;
       flex-direction: column;
       gap: 6px;
-      line-height: 10px;
+      line-height: 8px;
       color: rgba(255,255,255,.5);
       font-size: 10px;
     }

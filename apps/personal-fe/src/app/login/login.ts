@@ -55,7 +55,6 @@ export class Login implements AfterViewInit {
   public insert = httpResource(() => {
     const data = this.saveData();
     const t = sessionStorage.getItem('token');
-    console.log(data, t);
     if (!data || !t) return undefined;
     return {
       method: 'POST',

@@ -51,7 +51,7 @@ export class LoginService {
     if (!credential) return undefined;
     return {
       method: 'POST',
-      url: 'https://project-15rpb.vercel.app/api/admin/login',
+      url: '/api/admin/login',
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept': 'application/json',
